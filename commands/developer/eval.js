@@ -17,10 +17,14 @@ module.exports = {
         await interaction.deferReply();
 
         try {
-            const evaled = await eval(code);
+            var evaled = clean(await eval(code));
+
+            if (evaled.length > 4096) {
+                evaled = evaled.substr(0, 4096-9-3)+"...";
+            }
 
             embed.setTitle("Output 📝")
-            embed.setDescription(`\`\`\`js\n${clean(evaled)}\`\`\``);
+            embed.setDescription(`\`\`\`js\n${evaled}\`\`\``);
 
             await interaction.editReply({ embeds: [embed] });
         }
