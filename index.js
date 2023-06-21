@@ -1,3 +1,6 @@
+process.on("unhandledRejection", error => console.error(error));
+process.on("uncaughtException", error => console.error(error));
+
 const fs = require('node:fs');
 const path = require('node:path');
 const { Client, Collection, GatewayIntentBits } = require('discord.js');
@@ -37,4 +40,4 @@ for (const file of eventFiles) {
     }
 }
 
-client.login(process.env.TOKEN);
+client.login(process.env.Token);
